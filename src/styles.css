@@ -1,0 +1,464 @@
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+/* ========================================
+   Global
+   ======================================== */
+
+html,
+body {
+  font-family: Manrope, sans-serif;
+}
+
+body .p-component,
+body button,
+body input {
+  font-family: inherit;
+}
+
+/* ========================================
+   Game tiles
+   ======================================== */
+
+.guess-row {
+  perspective: 900px;
+}
+
+.guess-tile {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.4rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1.15;
+  overflow: hidden;
+  word-break: break-word;
+  transform-origin: bottom;
+  animation: unveil 0.45s ease-out both;
+}
+
+@keyframes unveil {
+  from {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   Country reveal — Bento layout
+   ======================================== */
+
+app-country-reveal {
+  display: block;
+  scroll-margin-top: 1.5rem;
+}
+
+.reveal-bento {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+
+  grid-template-areas:
+    "header"
+    "about"
+    "climate"
+    "sights"
+    "facts"
+    "plugs"
+    "travel"
+    "again";
+
+  align-items: stretch;
+}
+
+.reveal-bento > p-card {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.reveal-bento > p-card > .p-card {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  border-radius: 1rem;
+}
+
+/* Tablet layout */
+
+@media (min-width: 768px) {
+  .reveal-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-areas:
+      "header header"
+      "about facts"
+      "climate climate"
+      "sights plugs"
+      "travel travel"
+      "again again";
+  }
+}
+
+/* Desktop layout */
+
+@media (min-width: 992px) {
+  .reveal-bento {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+
+    grid-template-areas:
+      "header header header"
+      "about climate sights"
+      "facts climate plugs"
+      "facts climate travel"
+      "again again again";
+  }
+}
+
+/* ========================================
+   Country identity — Landscape header
+   ======================================== */
+
+.reveal-header {
+  grid-area: header;
+  grid-column: 1 / -1;
+  min-width: 0;
+  width: 100%;
+}
+
+.reveal-header > .p-card,
+.reveal-identity-card.p-card {
+  position: relative;
+  width: 100%;
+  min-height: 13rem;
+  border-radius: 1rem;
+  overflow: hidden;
+
+  color: #1e293b;
+  background-color: #fff;
+
+  background-image:
+    linear-gradient(
+      to right,
+      #ffffff 0%,
+      #ffffff 20%,
+      rgba(255, 255, 255, 0.85) 30%,
+      rgba(255, 255, 255, 0.4) 45%,
+      transparent 65%
+    ),
+    var(--identity-art, none);
+
+  background-size: 100% 100%, 80% 104%;
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+}
+
+/* Header content */
+
+.reveal-header .p-card-body {
+  position: relative;
+  padding: 1.35rem;
+  background: transparent;
+}
+
+.reveal-header .p-card-content {
+  padding: 0;
+  background: transparent;
+}
+
+.reveal-header .text-color-secondary {
+  color: #475569 !important;
+}
+
+/* Glass-effect header pills */
+
+.reveal-header .reveal-pill {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #334155;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Country flag */
+
+.reveal-flag {
+  width: 4.75rem;
+  aspect-ratio: 3 / 2;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.35rem;
+  flex-shrink: 0;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive header */
+
+@media (max-width: 767px) {
+  .reveal-header > .p-card,
+  .reveal-identity-card.p-card {
+    min-height: 14rem;
+
+    background-image:
+      linear-gradient(
+        to right,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.85) 35%,
+        rgba(255, 255, 255, 0.25) 100%
+      ),
+      var(--identity-art, none);
+
+    background-size: 100% 100%, auto 104%;
+    background-position: left center, right center;
+  }
+
+  .reveal-header .p-card-body {
+    padding: 1rem;
+  }
+
+  .reveal-header .reveal-pill {
+    white-space: normal;
+  }
+
+  .reveal-flag {
+    width: 4rem;
+  }
+}
+
+/* ========================================
+   Bento grid areas
+   ======================================== */
+
+.reveal-about {
+  grid-area: about;
+}
+
+.reveal-facts {
+  grid-area: facts;
+}
+
+.reveal-climate {
+  grid-area: climate;
+}
+
+.reveal-sights {
+  grid-area: sights;
+}
+
+.reveal-plugs {
+  grid-area: plugs;
+}
+
+.reveal-travel {
+  grid-area: travel;
+}
+
+.reveal-again {
+  grid-area: again;
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 0 0;
+}
+
+/* ========================================
+   Separate hero image
+   ======================================== */
+
+/* Hidden because the landscape is now
+   integrated into the country header. */
+
+.reveal-bento > .reveal-hero-panel {
+  display: none;
+}
+
+/* ========================================
+   About card
+   ======================================== */
+
+.reveal-about-card {
+  background: linear-gradient(
+    to top,
+    color-mix(
+      in srgb,
+      var(--p-green-200) 45%,
+      transparent
+    ) 0%,
+    var(--p-card-background, var(--p-surface-card)) 40%
+  );
+}
+
+/* ========================================
+   Getting around card
+   ======================================== */
+
+.reveal-travel-card {
+  background: linear-gradient(
+    to top,
+    color-mix(
+      in srgb,
+      var(--p-blue-200) 45%,
+      transparent
+    ) 0%,
+    var(--p-card-background, var(--p-surface-card)) 40%
+  );
+}
+
+.reveal-plugs-card {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--p-yellow-200) 50%, transparent) 0%,
+    var(--p-card-background, var(--p-surface-card)) 42%
+  );
+}
+
+.reveal-plugs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+}
+
+.reveal-plug {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 4.25rem;
+}
+
+.reveal-plug img {
+  width: 3.35rem;
+  height: 3.35rem;
+  object-fit: contain;
+}
+
+.reveal-plug span {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ========================================
+   Climate and seasons
+   ======================================== */
+
+.reveal-seasons {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.reveal-seasons > app-season-card {
+  display: block;
+  min-width: 0;
+  height: 100%;
+}
+
+@media (min-width: 576px) {
+  .reveal-seasons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Individual season card */
+
+.season-card {
+  height: 100%;
+  min-height: 14rem;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border-radius: 1.15rem;
+  overflow: hidden;
+  color: #1e293b;
+}
+
+.season-card-copy {
+  box-sizing: border-box;
+  min-height: 14rem;
+  height: 100%;
+  padding: 4.6rem 36% 1.15rem 1.35rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* ========================================
+   Attractions
+   ======================================== */
+
+.reveal-sights .flex-1 {
+  min-width: 0;
+}
+
+.reveal-sights .p-image,
+.reveal-sights .p-image-preview-container {
+  display: block;
+  width: 100%;
+}
+
+.reveal-sight {
+  display: block;
+  width: 100%;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 0.85rem;
+}
+
+.reveal-sight-fallback {
+  width: 100%;
+  height: 7rem;
+  border-radius: 0.85rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  background: var(--p-surface-100);
+}
+
+@media (max-width: 575px) {
+  .reveal-sight,
+  .reveal-sight-fallback {
+    height: 5.5rem;
+  }
+}
+
+/* ========================================
+   Information pills
+   ======================================== */
+
+.reveal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+
+  font-size: 0.875rem;
+  white-space: nowrap;
+
+  background: var(--p-surface-100);
+  border: 1px solid var(--p-surface-border);
+}
+
+.reveal-pill i {
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}

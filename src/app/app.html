@@ -1,0 +1,27 @@
+<p-toast />
+
+<p-toolbar>
+  <ng-template #start>
+    <p-image src="logo.png" alt="Cleared!" height="40px" [preview]="false" />
+  </ng-template>
+  <ng-template #end>
+    <div class="flex align-items-center gap-3">
+      <p-button label="How to play" icon="pi pi-question-circle" [text]="true" (onClick)="game.openHowTo()" />
+      <div class="flex align-items-center gap-2">
+        <i class="pi pi-sun"></i>
+        <p-toggleswitch
+          [ngModel]="game.dark()"
+          (ngModelChange)="game.toggleDark($event)"
+          ariaLabel="Dark mode"
+        />
+        <i class="pi pi-moon"></i>
+      </div>
+    </div>
+  </ng-template>
+</p-toolbar>
+
+<div class="p-4">
+  <router-outlet />
+</div>
+
+<app-how-to-play-dialog />
